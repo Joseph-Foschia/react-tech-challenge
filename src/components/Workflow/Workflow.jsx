@@ -1,13 +1,10 @@
-import Canvas from "./Canvas";
-import WorkflowEditor from "./WorkflowEditor";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import Items from "./Items";
+import Canvas from "../Canvas/Canvas";
+import WorkflowEditor from "../WorkflowEditor/WorkflowEditor";
+import Items from "../Items/Items";
 import { useState } from "react";
 
 
 const Workflow = () => {
-
   const data = {
     _id: "bU4rMI7fEeeqxlvy4NOyyA==",
     ProjectId: "bOd74o7fEeeqxlvy4NOyyA==",
@@ -44,13 +41,13 @@ const Workflow = () => {
     ],
   };
 
+  const [actionList, setActionList] = useState(data.Stages);
+
   return (
-    <DndProvider backend={HTML5Backend}>
       <div className="Workflow">
-        <Canvas data={data}/>
-        <WorkflowEditor data={data}/>
+        <Canvas data={actionList} setActionList={setActionList}/>
+        <WorkflowEditor data={data.Stages}/>
       </div>
-    </DndProvider>
   );
 };
 

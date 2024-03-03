@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
-import Admin from './components/Admin';
-import Workflow from './components/Workflow';
+import Admin from './components/Admin/Admin';
+import Workflow from './components/Workflow/Workflow';
 
 const App = () => {
   return (
