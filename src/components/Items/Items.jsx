@@ -4,7 +4,7 @@ import { CSS } from "@dnd-kit/utilities";
 const Items = ({ id, name }) => {
 
   const {attributes, listeners, setNodeRef, transform, transition} = useSortable({id: id});
-
+  
   const style = {
     transition,
     transform: CSS.Transform.toString(transform)

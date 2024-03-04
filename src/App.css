@@ -1,11 +1,31 @@
+h1{
+  margin-top: 100px;
+}
+
+button {
+  height: 40px;
+  width: 70px;
+}
 .App {
   text-align: center;
 }
 
+.button-box{
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  margin: 30px;
+}
+
 .Workflow{
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.Canvas{
+  border: 1px solid black;
 }
 .drag-zone{
   display: flex;
@@ -15,12 +35,13 @@
 .container{
   border: 1px solid black;
   width: 100px;
+  height: 60px;
 }
 
 .WorkflowEditor {
   border: 2px solid black;
   height: 200px;
-  width: 400px;
+  width: 600px;
   display: flex;
   flex-wrap: wrap;
 }
