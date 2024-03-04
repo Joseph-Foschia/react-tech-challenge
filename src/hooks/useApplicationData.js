@@ -4,6 +4,8 @@ import workflowJSON from "../data/workflow.json";
 import { arrayMove } from "@dnd-kit/sortable";
 
 const useApplicationData = () => {
+
+  // Stateful variables
   const [state, setState] = useState({
     actionList: [],
     savedList: {},
@@ -11,6 +13,7 @@ const useApplicationData = () => {
   });
 
   useEffect(() => {
+
     // Ensure actionJSON is not empty and is an array
     if (actionJSON && Array.isArray(actionJSON)) {
       setState((prevState) => ({
@@ -35,34 +38,50 @@ const useApplicationData = () => {
     } else {
       console.error("Invalid or empty workflow.json file.");
     }
+    
   }, []);
 
-   // Takes the id of the task and goes through the tasks array where the given id occurs
+  // Takes the id of the task and goes through the tasks array where the given id occurs
   const getActionPos = (id) =>
     state.actionList.findIndex((action) => action.id === id);
 
   // Handles functionality when the dragged item is let go
   const handleDragEnd = (event) => {
-
     const { active, over } = event;
     const overId = over.data.current.sortable.containerId;
 
     // if the item is let go in the same position it will do nothing
     if (active.id === over.id) return;
 
+    const originalPos = getActionPos(active.id);
+    const newPos = getActionPos(over.id);
+
     // If the item is dropped on the Canvas it update the values within the object so it becomes visible in a later check, if not it sets them to null
     if (overId === "Sortable-1") {
+
       setState((prevState) => {
-        const originalPos = getActionPos(active.id);
-        const newPos = getActionPos(over.id);
+
         // Updates actionList and arrayMove
-        const updatedActions = prevState.actionList.map((action) => {
+        const updatedActions = prevState.actionList.map((action, idx) => {
           if (action.id === active.id) {
+            // Setting the isStart, prevStage and nextStage keys
+            let start = false;
+            let prev = idx - 1;
+            let next = idx + 1;
+
+            if (idx === 0) {
+              start = true;
+              prev = null;
+            } else if (idx === prevState.actionList.length) {
+              next = null;
+            }
+
             // Set nextStage and prevStage to have a value so they appear in the canvas
             return {
               ...action,
-              nextStage: newPos + 1,
-              prevStage: newPos - 1,
+              isStart: start,
+              nextStage: next,
+              prevStage: prev,
             };
           } else {
             return action;
@@ -74,11 +93,10 @@ const useApplicationData = () => {
 
         return { ...prevState, actionList: movedActions };
       });
-    } else {
-      setState((prevState) => {
-        const originalPos = getActionPos(active.id);
-        const newPos = getActionPos(over.id);
 
+    } else {
+
+      setState((prevState) => {
         const updatedActions = prevState.actionList.map((action) => {
           if (action.id === active.id) {
             // Set nextStage and prevStage to null so they get displayed in the Workflow Editor
@@ -97,6 +115,7 @@ const useApplicationData = () => {
         return { ...prevState, actionList: movedActions };
       });
     }
+
   };
 
   // Saves changes on click
@@ -123,7 +142,7 @@ const useApplicationData = () => {
     }));
   };
 
-  // Return the state variables and functions you want to expose
+  // Return state variables
   return {
     state,
     handleOnSaveClick,

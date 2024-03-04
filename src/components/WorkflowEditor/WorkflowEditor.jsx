@@ -3,18 +3,20 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import "./workfloweditor.css";
 
 const WorkflowEditor = ({ data }) => {
-
+  // Diplays only the items whos prevStage and nextStage aren't both null
   const dataList = data.map((stage) => {
     if (stage.prevStage === null && stage.nextStage === null)
-    return <Items id={stage.id} name={stage.action} key={stage.id} />;
+      return <Items id={stage.id} name={stage.action} key={stage.id} />;
   });
+
   return (
     <div className="WorkflowEditor drag-zone">
-        <SortableContext key={2} items={data} strategy={horizontalListSortingStrategy}>
-          {dataList}
-        </SortableContext>
+      <SortableContext items={data} strategy={horizontalListSortingStrategy}>
+        {dataList}
+      </SortableContext>
     </div>
   );
 };

@@ -3,8 +3,10 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import "./canvas.css";
 
 const Canvas = ({ data }) => {
+  // If either prevStage or nextStage has value it will append it
   const dataList = data.map((stage) => {
     if (stage.prevStage !== null || stage.nextStage !== null)
       return <Items id={stage.id} name={stage.action} key={stage.id} />;
@@ -12,15 +14,8 @@ const Canvas = ({ data }) => {
 
   return (
     <div className="Canvas drag-zone">
-      <SortableContext
-        key={1}
-        items={data}
-        strategy={horizontalListSortingStrategy}
-      >
+      <SortableContext items={data} strategy={horizontalListSortingStrategy}>
         {dataList}
-
-        {console.log(dataList.length)}
-        {dataList.length === 0 && <div className="placeholder">Drop Here</div>}
       </SortableContext>
     </div>
   );
