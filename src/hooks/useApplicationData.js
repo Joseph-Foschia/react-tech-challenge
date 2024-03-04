@@ -12,6 +12,7 @@ const useApplicationData = () => {
     actions: [],
   });
 
+  // Grab local JSON files
   useEffect(() => {
 
     // Ensure actionJSON is not empty and is an array
@@ -40,6 +41,8 @@ const useApplicationData = () => {
     }
     
   }, []);
+
+  // Main functions below
 
   // Takes the id of the task and goes through the tasks array where the given id occurs
   const getActionPos = (id) =>
