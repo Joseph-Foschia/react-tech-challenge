@@ -20,3 +20,14 @@ export const checkMissingActions = (data, Actions) => {
     return newStage;
   });
 };
+
+// Checks how many truthy elements there are in an array
+export const checkListLength = (arrayList) => {
+  let listLength = arrayList.length;
+  arrayList.map((element) => {
+    if (!element){
+      listLength --;
+    }
+  })
+  return listLength;
+}

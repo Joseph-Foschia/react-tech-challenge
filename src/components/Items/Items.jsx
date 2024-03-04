@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import "./items.css";
 
-const Items = ({ id, name }) => {
+const Items = ({ id, name, empty }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -15,7 +15,7 @@ const Items = ({ id, name }) => {
 
   return (
     <div
-      className="Items container"
+      className={`Items container ${empty}`}
       ref={setNodeRef}
       {...attributes}
       {...listeners}

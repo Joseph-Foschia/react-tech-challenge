@@ -3,3 +3,10 @@
   width: 100px;
   height: 60px;
 }
+
+/* If a container becomes empty it displays this */
+.empty{
+  border: 0;
+  font-size: 20px;
+  width: 200px;
+}
