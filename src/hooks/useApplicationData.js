@@ -37,22 +37,28 @@ const useApplicationData = () => {
     }
   }, []);
 
+   // Takes the id of the task and goes through the tasks array where the given id occurs
   const getActionPos = (id) =>
     state.actionList.findIndex((action) => action.id === id);
 
+  // Handles functionality when the dragged item is let go
   const handleDragEnd = (event) => {
+
     const { active, over } = event;
     const overId = over.data.current.sortable.containerId;
 
+    // if the item is let go in the same position it will do nothing
     if (active.id === over.id) return;
 
+    // If the item is dropped on the Canvas it update the values within the object so it becomes visible in a later check, if not it sets them to null
     if (overId === "Sortable-1") {
       setState((prevState) => {
         const originalPos = getActionPos(active.id);
         const newPos = getActionPos(over.id);
-
+        // Updates actionList and arrayMove
         const updatedActions = prevState.actionList.map((action) => {
           if (action.id === active.id) {
+            // Set nextStage and prevStage to have a value so they appear in the canvas
             return {
               ...action,
               nextStage: newPos + 1,
@@ -63,6 +69,7 @@ const useApplicationData = () => {
           }
         });
 
+        // Move the dragged element to its new position
         const movedActions = arrayMove(updatedActions, originalPos, newPos);
 
         return { ...prevState, actionList: movedActions };
@@ -74,6 +81,7 @@ const useApplicationData = () => {
 
         const updatedActions = prevState.actionList.map((action) => {
           if (action.id === active.id) {
+            // Set nextStage and prevStage to null so they get displayed in the Workflow Editor
             return {
               ...action,
               nextStage: null,
@@ -120,7 +128,7 @@ const useApplicationData = () => {
     state,
     handleOnSaveClick,
     handleOnCancelClick,
-    handleDragEnd
+    handleDragEnd,
   };
 };
 
