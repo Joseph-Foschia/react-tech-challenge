@@ -26,6 +26,8 @@ button {
 
 .Canvas{
   border: 1px solid black;
+  /* width: 800px;
+  height: 200px; */
 }
 .drag-zone{
   display: flex;

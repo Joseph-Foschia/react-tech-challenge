@@ -1,0 +1,9 @@
+{
+  "Actions": [
+    "Import",
+    "Export",
+    "Sort",
+    "Extract",
+    "Split"
+  ]
+}

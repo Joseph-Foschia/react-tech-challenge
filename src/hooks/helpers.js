@@ -17,8 +17,6 @@ export const checkMissingActions = (data, Actions) => {
       prevStage: null,
       nextStage: null,
     };
-    data.Stages.push(newStage);
+    return newStage;
   });
-
-  return data;
 };

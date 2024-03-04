@@ -4,7 +4,7 @@ import {
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
-const WorkflowEditor = ({ data, setActionList }) => {
+const WorkflowEditor = ({ data }) => {
 
   const dataList = data.map((stage) => {
     if (stage.prevStage === null && stage.nextStage === null)
